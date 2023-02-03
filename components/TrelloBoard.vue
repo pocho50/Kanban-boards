@@ -32,17 +32,33 @@ const columns = ref<Column[]>([
     }
 ])
 const alt = useKeyModifier("Alt")
+
+function createColum() {
+    const column: Column = {
+        id: nanoid(),
+        title: "",
+        tasks: []
+    }
+    columns.value.push(column);
+    nextTick(() => {
+        (document.querySelector('.column:last-of-type .title-input') as HTMLInputElement).focus()
+    })
+
+}
 </script>
 
 <template>
-    <div>
+    <div class="flex items-start overflow-x-auto gap-4">
         <draggable v-model="columns" group="columns" handle=".drag-handle" :animation="150" item-key="id"
-            class=" flex gap-4 overflow-x-auto items-start">
+            class=" flex gap-4  items-start">
             <template #item="{ element: column }: { element: Column }">
-                <div class="bg-gray-200 p-5 rounded min-w-[250px]">
+                <div class="column bg-gray-200 p-5 rounded min-w-[250px]">
                     <header class="font-bold mb-4">
                         <DragHandle />
-                        {{ column.title }}
+                        <input class="title-input bg-transparent focus:bg-white rounded px-1 w-4/5"
+                            @keyup.enter="($event.target as HTMLInputElement).blur()"
+                            @keydown.backspace="column.title === '' ? columns = columns.filter(c => c.id !== column.id) : null"
+                            v-model="column.title" type="text">
                     </header>
                     <draggable v-model="column.tasks" handle=".drag-handle"
                         :group="{ name: 'tasks', pull: alt ? 'clone' : true }" :animation="150" item-key="id">
@@ -61,6 +77,9 @@ const alt = useKeyModifier("Alt")
             </template>
         </draggable>
 
+        <button @click="createColum" class="bg-gray-200 whitespace-nowrap p-2 rounded opacity-50">
+            + Add another column
 
+        </button>
     </div>
 </template>
