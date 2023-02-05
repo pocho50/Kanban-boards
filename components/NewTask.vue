@@ -27,8 +27,7 @@ function createTask(e: Event) {
 <template>
     <div>
         <textarea v-model="title" @keydown.tab="createTask" @keyup.enter="createTask"
-            class="focus:bg-white focus:shadow resize-none rounded w-full border-none bg-transparent p-2 cursor-pointer overflow-y-hidden"
-            :class="{
+            class="textarea textarea-ghost resize-none w-full cursor-pointer" :class="{
               'h-7': !focused,
               'h-20': focused,
             }" style="outline: none !important" @focus="focused = true" @blur="focused = false"
