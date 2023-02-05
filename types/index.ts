@@ -1,5 +1,11 @@
 export type ID = string;
 
+export interface Board {
+  id: ID;
+  title: string;
+  columns: Column[];
+}
+
 export interface Column {
   id: ID;
   title: string;

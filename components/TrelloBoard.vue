@@ -1,36 +1,11 @@
 <script setup lang="ts">
-import type { Column, Task } from "@/types"
-import { nanoid } from "nanoid"
+import type { Column, Task, Board } from "@/types"
 import draggable from "vuedraggable"
-const columns = useLocalStorage<Column[]>('trelloBoard', [
-    {
-        id: nanoid(),
-        title: "Backlog",
-        tasks: [
-            {
-                id: nanoid(),
-                title: "Create marketing landing page",
-                createAt: new Date()
+import { nanoid } from "nanoid"
 
-            },
-            {
-                id: nanoid(),
-                title: "New Design",
-                createAt: new Date()
-            }
-        ]
-    },
-    {
-        id: nanoid(),
-        title: "Complete",
-        tasks: [],
-    },
-    {
-        id: nanoid(),
-        title: "I Progress",
-        tasks: [],
-    }
-])
+const props = defineProps<{
+    board: Board
+}>();
 const alt = useKeyModifier("Alt")
 
 function createColum() {
@@ -39,7 +14,7 @@ function createColum() {
         title: "",
         tasks: []
     }
-    columns.value.push(column);
+    props.board.columns.push(column);
     nextTick(() => {
         (document.querySelector('.column:last-of-type .title-input') as HTMLInputElement).focus()
     })
@@ -49,7 +24,7 @@ function createColum() {
 
 <template>
     <div class="flex items-start overflow-x-auto gap-4">
-        <draggable v-model="columns" group="columns" handle=".drag-handle" :animation="150" item-key="id"
+        <draggable v-model="props.board.columns" group="columns" handle=".drag-handle" :animation="150" item-key="id"
             class=" flex gap-4  items-start">
             <template #item="{ element: column }: { element: Column }">
                 <div class="column bg-base-200 p-5 rounded min-w-[250px]">
@@ -57,7 +32,7 @@ function createColum() {
                         <DragHandle />
                         <input class="title-input bg-transparent focus:bg-white rounded px-1 w-4/5"
                             @keyup.enter="($event.target as HTMLInputElement).blur()"
-                            @keydown.backspace="column.title === '' ? columns = columns.filter(c => c.id !== column.id) : null"
+                            @keydown.backspace="column.title === '' ? props.board.columns = props.board.columns.filter(c => c.id !== column.id) : null"
                             v-model="column.title" type="text">
                     </header>
                     <draggable v-model="column.tasks" handle=".drag-handle"
