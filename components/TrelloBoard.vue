@@ -3,6 +3,8 @@ import type { Column, Task, Board, ID } from "@/types"
 import draggable from "vuedraggable"
 import { nanoid } from "nanoid"
 import useBoards from "@/composables/useBoards"
+import { TrashIcon } from '@heroicons/vue/24/outline'
+
 
 const { boards } = useBoards();
 
@@ -43,11 +45,14 @@ function createColum() {
                 <template #item="{ element: column }: { element: Column }">
                     <div class="column bg-base-200 p-5 rounded min-w-[250px]">
                         <header class="font-bold mb-4">
-                            <DragHandle />
+                            <DragHandle class="h-4 w-4" />
                             <input class="title-input bg-transparent focus:bg-white rounded px-1 w-4/5"
                                 @keyup.enter="($event.target as HTMLInputElement).blur()"
                                 @keydown.backspace="column.title === '' ? getBoard().columns = getBoard().columns.filter(c => c.id !== column.id) : null"
                                 v-model="column.title" type="text">
+                            <TrashIcon class="h-5 w-5 hover:text-red-600 pt-1 cursor-pointer inline-block"
+                                @click="getBoard().columns = getBoard().columns.filter(c => c.id !== column.id)" />
+
                         </header>
                         <draggable v-model="column.tasks" handle=".drag-handle"
                             :group="{ name: 'tasks', pull: alt ? 'clone' : true }" :animation="150" item-key="id">

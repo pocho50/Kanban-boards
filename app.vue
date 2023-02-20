@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import useBoards from '@/composables/useBoards'
-import { TrashIcon } from '@heroicons/vue/24/solid'
+import { TrashIcon } from '@heroicons/vue/24/outline'
 
 const { boards, currentBoard, createNewBoard, removeBoard } = useBoards();
 </script>

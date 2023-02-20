@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { Task, ID } from '~~/types';
+import { XMarkIcon } from '@heroicons/vue/24/outline'
+
 
 const props = defineProps<{
     task: Task
@@ -19,8 +21,9 @@ onKeyStroke("Backspace", (e) => {
 <template>
     <div :title="task.createAt.toLocaleString()" class="task bg-white p-2 mb-2 rounded shadow-sm max-w-[250px] flex"
         @focus="focused = true" @blur="focused = false" tabindex="0">
-        <DragHandle class="pr-2" />
-        <span>{{ task.title }}</span>
+        <DragHandle class="pr-2 h-6 w-6" />
+        <span class="grow">{{ task.title }}</span>
+        <XMarkIcon class="h-5 w-5 hover:text-red-600 pt-1 cursor-pointer" @click="$emit('delete', task.id)" />
     </div>
 </template>
 <style>
