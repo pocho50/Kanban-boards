@@ -21,11 +21,11 @@ const { boards, currentBoard, createNewBoard, removeBoard } = useBoards();
         <!-- Sidebar content here -->
         <li v-for="board in boards" :id="board.id">
 
-          <div class="flex justify-between w-full">
-            <label for="my-drawer" class="w-full h-full cursor-pointer" @click="currentBoard = board">
+          <div class="flex justify-between w-full p-0">
+            <label for="my-drawer" class="w-full h-full cursor-pointer p-3" @click="currentBoard = board">
               {{ board.title }}
             </label>
-            <button @click="removeBoard(board)">
+            <button @click="removeBoard(board)" class="pr-3">
               <TrashIcon class="h-4 hover:text-red-600" />
             </button>
           </div>
