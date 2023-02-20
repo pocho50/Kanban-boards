@@ -33,7 +33,7 @@ function createColum() {
 <template>
     <div>
         <h2 class="font-bold mb-4 text-2xl">
-            {{ getBoard().title }}
+            {{ getBoard()?.title }}
 
         </h2>
         <div class="flex items-start overflow-x-auto gap-4">

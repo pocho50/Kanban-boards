@@ -13,6 +13,7 @@
     "nuxt": "^3.0.0"
   },
   "dependencies": {
+    "@heroicons/vue": "^2.0.16",
     "@vueuse/nuxt": "^9.11.1",
     "nanoid": "^4.0.0",
     "vuedraggable": "^4.1.0"

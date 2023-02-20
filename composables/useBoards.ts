@@ -29,10 +29,17 @@ export default function useBoards() {
     },
   ]);
 
-  const currentBoard = ref<Board>(boards.value[0]);
+  const currentBoard = ref<Board | null>(boards.value[0]);
 
   const createNewBoard = (newBoard: Board) => {
     boards.value.push(newBoard);
+  };
+
+  const removeBoard = (board: Board) => {
+    if (currentBoard.value.id === board.id) {
+      currentBoard.value = null;
+    }
+    boards.value = boards.value.filter((b) => b.id !== board.id);
   };
 
   return {
@@ -40,5 +47,6 @@ export default function useBoards() {
     boards,
     currentBoard,
     createNewBoard,
+    removeBoard,
   };
 }
