@@ -2,4 +2,10 @@
 export default defineNuxtConfig({
   modules: ["@nuxtjs/tailwindcss", "@vueuse/nuxt"],
   ssr: false,
+  app: {
+    head: {
+      charset: "utf-8",
+      title: "TrelloTask",
+    },
+  },
 });
