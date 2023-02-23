@@ -12,7 +12,7 @@
                 </label>
             </div>
             <div class="flex-1">
-                <a class="btn btn-ghost normal-case text-xl">trelloBoard</a>
+                <a class="btn btn-ghost normal-case text-xl">Kanban Boards</a>
             </div>
             <div class="flex-none">
                 <button class="btn btn-square btn-ghost">

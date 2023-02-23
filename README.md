@@ -17,6 +17,10 @@ npm install
 pnpm install
 ```
 
+## Demo App
+
+[https://effervescent-mandazi-727418.netlify.app/](https://effervescent-mandazi-727418.netlify.app/)
+
 ## Development Server
 
 Start the development server on http://localhost:3000
